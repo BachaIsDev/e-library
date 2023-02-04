@@ -1,7 +1,6 @@
 package com.bacha.libraryproject.restcontroller;
 
 import com.bacha.libraryproject.entity.Book;
-import com.bacha.libraryproject.entity.User;
 import com.bacha.libraryproject.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
