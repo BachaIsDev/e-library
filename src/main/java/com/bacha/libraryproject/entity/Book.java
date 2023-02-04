@@ -1,9 +1,12 @@
 package com.bacha.libraryproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Table(name = "books")
@@ -24,4 +27,9 @@ public class Book {
 
     @Column(name = "genre")
     private String genre;
+
+    @ManyToMany(mappedBy = "books")
+    @JsonIgnoreProperties(value = "books")
+    private List<User> users;
+
 }
