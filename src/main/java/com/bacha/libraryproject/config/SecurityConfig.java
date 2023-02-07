@@ -27,7 +27,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     private final UserDetailsService userDetailsService;
 
     @Autowired
@@ -39,7 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder(12);
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -68,8 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
-
-
 
     @Bean
     protected DaoAuthenticationProvider daoAuthenticationProvider(){
