@@ -1,31 +1,24 @@
 package com.bacha.libraryproject.security;
 
-import com.bacha.libraryproject.entity.Status;
 import com.bacha.libraryproject.entity.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.beans.PersistenceDelegate;
 import java.util.Collection;
 import java.util.List;
 
 @Data
 public class SecurityUser implements UserDetails {
 
-    private String username;
-
-    private String password;
+    private final User user;
 
     private List<SimpleGrantedAuthority> authorities;
 
-    private final boolean isActive;
-
-    public SecurityUser(String username, String password, List<SimpleGrantedAuthority> authorities, boolean isActive) {
-        this.username = username;
-        this.password = password;
-        this.authorities = authorities;
-        this.isActive = isActive;
+    public SecurityUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -35,42 +28,36 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return user.getUsername();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return isActive;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return isActive;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return isActive;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return isActive;
+        return true;
     }
 
-    public static UserDetails fromUser(User user){
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getRole().getAuthorities());
+    // Need to receive data of authenticated user
+    public User getUser(){
+        return this.user;
     }
 }

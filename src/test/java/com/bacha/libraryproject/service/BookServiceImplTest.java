@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class BookServiceImplTest {
-
     private static final int ID = 1;
 
     @Mock
