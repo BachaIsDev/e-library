@@ -12,7 +12,7 @@ import org.springframework.validation.Validator;
 public class UserValidator implements Validator {
 
 
-    private UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     public UserValidator(UserDetailsServiceImpl userDetailsService) {
